@@ -1,0 +1,21 @@
+@mixin cutByLine($line) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@mixin placeholder($prop, $value) {
+  &::-webkit-input-placeholder {
+    /* Edge */
+    #{$prop}: $value;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer */
+    #{$prop}: $value;
+  }
+
+  &::placeholder {
+    #{$prop}: $value;
+  }
+}
