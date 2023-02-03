@@ -30,7 +30,12 @@
   animation-duration: $duration;
 }
 
-@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+@mixin fluid-type(
+  $min-font-size,
+  $max-font-size,
+  $min-vw: 280px,
+  $max-vw: 1920px
+) {
   $u1: unit($min-vw);
   $u2: unit($max-vw);
   $u3: unit($min-font-size);
