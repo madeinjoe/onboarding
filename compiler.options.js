@@ -2,8 +2,8 @@ const configuration = {
   sass: ["./assets/src/scss/style.scss"],
   js: ["./assets/src/js/script.js"],
   browserSync: {
-    proxy: "http://wordpress.local/",
-    host: "wordpress.local",
+    proxy: "http://dev-theme-setup.test/",
+    host: "dev-theme-setup.test",
     watchTask: true,
     open: "external",
     files: [

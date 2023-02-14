@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for Create Custom Post Type - Laten Beleggen used in WP-admin
  *
@@ -7,16 +8,18 @@
  * @package HelloElementor
  */
 
-defined( 'ABSPATH' ) || die( "Can't access directly" );
+defined('ABSPATH') || die("Can't access directly");
 
-class ExampleCPT extends RegisterCPT{
+class ExampleCPT extends RegisterCPT
+{
 
 	public function __construct()
 	{
-		add_action('init',  [$this, 'exampleCreatCPT']);
+		// add_action('init',  [$this, 'exampleCreatCPT']);
 	}
 
-	public function exampleCreatCPT() {
+	public function exampleCreatCPT()
+	{
 
 		// argument cpt
 		$title = 'example CPT';
@@ -33,7 +36,6 @@ class ExampleCPT extends RegisterCPT{
 		];
 		$this->taxonomy($slug_cpt, $slug_tax, $args);
 	}
-
 }
 
 // initialize
