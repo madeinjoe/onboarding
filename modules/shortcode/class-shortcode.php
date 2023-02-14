@@ -1,24 +1,27 @@
 <?php
-defined( 'ABSPATH' ) || die( "Can't access directly" );
+defined('ABSPATH') || die("Can't access directly");
 
 class ShortCodeMI
 {
     public function __construct()
     {
-        add_shortcode('short_code_time',[$this, 'current_time_ukraine_cest']);
-        add_shortcode('short_code_time2',[$this, 'current_time_ukraine_cest2']);
+        $this->shortcode();
     }
 
-    public function current_time_ukraine_cest()
+    public function shortcode()
     {
-        $date = new DateTime("now", new DateTimeZone('Europe/Berlin') );
-        echo  "<span class='current_time_zone_cest'> Ukraine Time ".$date->format("F d").", ".$date->format("Y").", ".$date->format("h:i a")." CEST</span>";
-    }
+        $scan_files = scandir(__DIR__ . '/templates');
+        $shortcodes = array_slice($scan_files, 2);
 
-    public function current_time_ukraine_cest2()
-    {
-        $date = new DateTime("now", new DateTimeZone('Europe/Berlin') );
-        echo  "<span class='current_time_zone_cest2'> Current Ukraine Time ".$date->format("F d").", ".$date->format("Y").", ".$date->format("h:i a")." CEST</span>";
+        // $shortcodes = $this->lists();
+        foreach ($shortcodes as $key => $sc) {
+            $name = str_replace('.php', '', $sc);
+            add_shortcode($name, function ($atts) use ($sc) {
+                ob_start();
+                require __DIR__ . '/templates/' . $sc;
+                return ob_get_clean();
+            });
+        }
     }
 }
 
