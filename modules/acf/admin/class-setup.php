@@ -56,7 +56,7 @@ class Setup
 
 		$screen = get_current_screen();
 
-		if ($screen->id == 'custom-fields_page_acf-tools' && !isset($_GET['keys'])) {
+		if ($screen->id == 'acf_page_acf-tools' && !isset($_GET['keys'])) {
 			wp_enqueue_style(
 				'bd-acf-css',
 				$this->url . '/assets/acf-export-to-theme.css',
