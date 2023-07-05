@@ -3,13 +3,12 @@
 namespace Custom\WPMenu;
 
 defined('ABSPATH') || die("Direct access not allowed");
-require_once MODULES_DIR . '/helper/custom-input.php';
+require_once MODULES_DIR . '/helper/custom-input-helper.php';
 
-use \Custom\Input\CustomInput as CI;
+use \Custom\InputHelper\CustomInput as CI;
 
 class CustomAdminMenu
 {
-    protected $customInput;
     protected $ssMetaKeys;
 
     public function __construct()
@@ -33,10 +32,9 @@ class CustomAdminMenu
                 ''
             ]
         ];
-        $this->customInput = new CI();
+
         add_action('admin_menu', [$this, 'shopSettingMenu']);
         add_action('admin_post_change_shop_setting', [$this, 'shopSettingUpdate']);
-        // add_action('add_meta_boxes', [$this, 'shopSettingMB']);
     }
 
     public function shopSettingMenu()
@@ -62,43 +60,6 @@ class CustomAdminMenu
         echo $output;
 
         // include __DIR__ . '/shop-setting-page.php';
-        // echo 'teas';
-    }
-
-    public function shopSettingMB()
-    {
-        add_meta_box(
-            'Shop Setting',
-            'Shop Setting',
-            [$this, 'shopSettingRenderMB'],
-            // 'shop-setting',
-            'admin.php?page=shop-setting',
-            'advanced',
-            'default',
-            ['meta' => $this->ssMetaKeys]
-        );
-    }
-
-    public function shopSettingRenderMB($post, $callback_args = [])
-    {
-        // include __DIR__ . '/shop-setting-page.php';
-        echo 'a';
-        extract(['meta' => $this->ssMetaKeys]);
-        ob_start();
-        include __DIR__ . '/shop-setting-page.php';
-        $output = ob_get_clean();
-        echo $output;
-
-        /** Get meta key value from db */
-        // $mbData = $callback_args['args']['meta'];
-        // foreach ($callback_args['args']['meta'] as $key => $value) {
-        //     $mbData[$key]['meta-key'] = $key;
-        //     $mbData[$key]['meta-value'] = get_post_meta($post->ID, $key, true);
-        // }
-
-        /** Render metaboxes */
-        // $this->customInput->renderAllInput($mbData, true, '_shop_setting_metabox', '_shop_setting_metabox'); // renderAllInput is a non-static, automaticly added _nonce into attribute name of nonce input
-        // print("<pre>" . print_r($test, true) . "</pre>");
     }
 
     public function shopSettingUpdate()

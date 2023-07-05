@@ -1,0 +1,59 @@
+.cs-flex {
+  display: flex;
+}
+
+.cs-flex-row {
+  flex-direction: row;
+}
+
+.cs-flex-col {
+  flex-direction: column;
+}
+
+.cs-flex .cs-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.cs-flex .cs-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.cs-flex .items-start {
+  align-items: start;
+}
+
+.cs-flex .items-center {
+  align-items: center;
+}
+
+.cs-flex .items-end {
+  align-items: end;
+}
+
+.cs-flex .justify-start {
+  justify-content: start;
+}
+
+.cs-flex .justify-center {
+  justify-content: center;
+}
+
+.cs-flex .justify-evently {
+  justify-content: evently;
+}
+
+.cs-flex .justify-between {
+  justify-content: between;
+}
+
+.cs-flex .justify-around {
+  justify-content: around;
+}
+
+.cs-gap-1 {
+  gap: 0.25rem
+}
+
+.cs-gap-2 {
+  gap: 0.5rem
+}

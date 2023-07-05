@@ -10,21 +10,19 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-$terms = get_terms(array(
-	'taxonomy'   => 'size',
-	'hide_empty' => false,
-));
-
-print("<pre>" . print_r($terms, true) . "</pre>");
-
 while (have_posts()) :
 	the_post();
+
+	$filteredTitle = apply_filters('cf_filter_the_title', get_the_title(), 'HOT');
+
+	// print("<pre>" . print_r($filteredTitle, true) . "</pre>");
 ?>
 
 	<main id="content" <?php post_class('site-main'); ?> role="main">
 		<?php if (apply_filters('hello_elementor_page_title', true)) : ?>
 			<header class="page-header">
-				<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+				<!-- <?php the_title('<h1 class="entry-title">', '</h1>'); ?> -->
+				<?php echo apply_filters('cf_filter_the_title', get_the_title(), 'HOT', ['markup-open' => '<h1 class="entry-title">', 'markup-close' => '</h1>']); ?>
 			</header>
 		<?php endif; ?>
 		<div class="page-content">
