@@ -1,6 +1,6 @@
 <?php
 
-namespace Custom\InputHelper;
+namespace Custom\Helper;
 
 defined('ABSPATH') || die("Direct access not allowed");
 

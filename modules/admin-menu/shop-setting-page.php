@@ -1,7 +1,7 @@
 <?php
 require_once MODULES_DIR . '/helper/custom-input-helper.php';
 
-use \Custom\InputHelper\CustomInput as CI;
+use \Custom\Helper\CustomInput as CI;
 
 ?>
 

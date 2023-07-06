@@ -10,43 +10,43 @@
   flex-direction: column;
 }
 
-.cs-flex .cs-flex-nowrap {
+.cs-flex.cs-flex-nowrap {
   flex-wrap: nowrap;
 }
 
-.cs-flex .cs-flex-wrap {
+.cs-flex.cs-flex-wrap {
   flex-wrap: wrap;
 }
 
-.cs-flex .items-start {
+.cs-flex.cs-items-start {
   align-items: start;
 }
 
-.cs-flex .items-center {
+.cs-flex.cs-items-center {
   align-items: center;
 }
 
-.cs-flex .items-end {
+.cs-flex.cs-items-end {
   align-items: end;
 }
 
-.cs-flex .justify-start {
+.cs-flex.cs-justify-start {
   justify-content: start;
 }
 
-.cs-flex .justify-center {
+.cs-flex.cs-justify-center {
   justify-content: center;
 }
 
-.cs-flex .justify-evently {
+.cs-flex.cs-justify-evently {
   justify-content: evently;
 }
 
-.cs-flex .justify-between {
+.cs-flex.cs-justify-between {
   justify-content: between;
 }
 
-.cs-flex .justify-around {
+.cs-flex.cs-justify-around {
   justify-content: around;
 }
 
@@ -56,4 +56,12 @@
 
 .cs-gap-2 {
   gap: 0.5rem
+}
+
+.cs-border-red {
+  border: 1px solid red;
+}
+
+.cs-min-h-screen {
+  height: 100vh;
 }
