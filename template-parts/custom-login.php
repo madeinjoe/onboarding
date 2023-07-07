@@ -7,11 +7,6 @@
 
 defined('ABSPATH') || die('Direct Access not allowed');
 
-require_once MODULES_DIR . '/helper/custom-input-helper.php';
-
-use \Custom\Helper\CustomInput as CI;
-
-
 get_header();
 
 while (have_posts()) :

@@ -73,13 +73,26 @@ class AdmissionPage extends RegisterPost
                 wp_set_auth_cookie($check->ID, $credentials['remember'], is_ssl());
                 do_action('wp_login', $check->data->user_login, $check);
 
+                switch (strtolower($check->roles[0])) {
+                    case 'subscriber':
+                        $postForSubs = get_page_by_path('hello-subscriber', 'object', 'post');
+                        $redirect = get_permalink($postForSubs->ID);
+                        break;
+                    case 'editor':
+                    case 'contributor':
+                        $redirect = admin_url('edit.php');
+                        break;
+                    default:
+                        $redirect = admin_url('/dashboard');
+                }
+
                 $response = [
                     'success' => true,
                     'message' => 'Success Login.',
                     'data' => [
                         'session' => wp_get_all_sessions(),
                         'check' => $check,
-                        'redirect' => home_url('/dashboard')
+                        'redirect' => $redirect
                     ]
                 ];
 

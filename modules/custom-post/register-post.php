@@ -34,9 +34,9 @@ class RegisterPost
         if (empty($posts) || !$link) {
             /** Check if current user is allowed */
             $currentUser = wp_get_current_user();
-            if (in_array(strtolower($currentUser->roles[0]), ['administrator'])) {
+            if (in_array(strtolower($currentUser->roles[0]), $allowed_role ?? $this->allowedRoles)) {
                 /** Get the args */
-                $defaultArguments = self::theArguments($permalink, $title, $post_type, $template, $args);
+                $defaultArguments = self::theArguments($permalink, $title, $post_type, $template);
 
                 if (!empty($args)) {
                     foreach ($args as $key => $value) {
@@ -50,7 +50,7 @@ class RegisterPost
         }
     }
 
-    protected function theArguments(String $permalink, String $title, String $post_type, String $template, array $args)
+    protected function theArguments(String $permalink, String $title, String $post_type, String $template)
     {
         $defaultArguments = [
             'post_title' => $title,
