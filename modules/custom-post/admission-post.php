@@ -7,6 +7,7 @@ class AdmissionPage extends RegisterPost
     public function __construct()
     {
         add_action('after_setup_theme', [$this, 'loginPage']);
+        add_action('after_setup_theme', [$this, 'registerPage']);
         add_action('wp_ajax_custom_login', [$this, 'loginHandle']);
         add_action('wp_ajax_nopriv_custom_login', [$this, 'loginHandle']);
     }
@@ -28,6 +29,25 @@ class AdmissionPage extends RegisterPost
         ];
 
         $this->makePost($permalink, 'Login Here', 'page', ['administrator'], $template, $args);
+    }
+
+    public function registerPage()
+    {
+        $permalink = 'custom-register';
+        $template = 'template-parts/custom-register.php';
+        $args = [
+            'post_name' => $permalink,
+            'post_author' => get_current_user_id(),
+            'post_date' => date('Y-m-d H:i:s', time()),
+            'post_date_gmt' => gmdate('Y-m-d H:i:s', time()),
+            'post_status' => 'publish',
+            'post_type' => 'page',
+            'comment_status' => 'closed',
+            'ping_status' => 'closed',
+            'post_parent' => 0,
+        ];
+
+        $this->makePost($permalink, 'Register Now', 'page', ['administrator'], $template, $args);
     }
 
     public function loginHandle()
