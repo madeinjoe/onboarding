@@ -7,6 +7,15 @@
 
 defined('ABSPATH') || die('Direct Access not allowed');
 
+/** Check if user is logged in */
+if (is_user_logged_in()) {
+    wp_redirect(admin_url('/'));
+}
+
+/** Get login url */
+$pageLogin = get_page_by_path('custom-registration', 'object', 'page');
+$loginUrl = get_permalink($pageLogin->ID);
+
 get_header();
 
 while (have_posts()) :

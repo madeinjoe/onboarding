@@ -14,6 +14,7 @@ class CustomEnqueue
         add_action('wp_enqueue_scripts', [$this, 'tailwindLayer']);
         add_action('wp_enqueue_scripts', [$this, 'fontawesomeCDN']);
         add_action('wp_enqueue_scripts', [$this, 'loginScripts']);
+        add_action('wp_enqueue_scripts', [$this, 'registrationScripts']);
         add_action('wp_enqueue_scripts', [$this, 'taskjsScript']);
     }
 
@@ -89,17 +90,27 @@ class CustomEnqueue
     public function loginScripts()
     {
         global $post;
-        if ($post->post_name == 'custom-login') {
+        if (!empty($post) && $post->post_name == 'custom-login') {
             /** Login js */
             wp_enqueue_script('login-js', ASSETSURI . '/src/custom/login-script.js', array('jquery'));
             wp_localize_script('login-js', 'clData', array('loginUrl' => admin_url('admin-ajax.php')));
         }
     }
 
+    public function registrationScripts()
+    {
+        global $post;
+        if (!empty($post) && $post->post_name == 'custom-registration') {
+            /** Login js */
+            wp_enqueue_script('registration-js', ASSETSURI . '/src/custom/registration-script.js', array('jquery'));
+            wp_localize_script('registration-js', 'caData', array('registrationUrl' => admin_url('admin-ajax.php')));
+        }
+    }
+
     public function taskjsScript()
     {
         global $post;
-        if ($post->post_name == 'task-javascript') {
+        if (!empty($post) && $post->post_name == 'task-javascript') {
             wp_enqueue_script('task-js', ASSETSURI . '/src/custom/task-js-script.js', array('jquery'));
             wp_localize_script('task-js', 'tjsData', array('loginUrl' => admin_url('admin-ajax.php')));
         }

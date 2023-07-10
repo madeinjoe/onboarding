@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * Template Name: Custom Registration
+ *
+ */
+
 defined('ABSPATH') || die('Direct Access not allowed');
 
 get_header();
+
+/** Get login url */
+$pageLogin = get_page_by_path('custom-login', 'object', 'page');
+$loginUrl = get_permalink($pageLogin->ID);
 
 while (have_posts()) :
     the_post();
@@ -28,28 +37,26 @@ while (have_posts()) :
                     </div>
                     <div class="relative w-full input-group">
                         <label for="ft-registration-password" class="form-label">Password<span class="required">*</span></label>
-                        <input type="password" id="ft-registration-password" name="registration-password" class="form-control" placeholder="Input your password ..." required="required">
+                        <input type="password" id="ft-registration-password" name="registration-password" class="form-control" placeholder="Input your password ..." required="required" autocomplete="off">
                         <i class="absolute fa-solid fa-eye password-sh-toggle pw-s"></i>
                         <i class="absolute hidden fa-solid fa-eye-slash password-sh-toggle pw-h"></i>
                     </div>
                     <div class="relative w-full input-group">
                         <label for="ft-registration-re-password" class="form-label">Password Confirm<span class="required">*</span></label>
-                        <input type="password" id="ft-registration-re-password" name="registration-re-password" class="form-control" placeholder="Input your password ..." required="required">
+                        <input type="password" id="ft-registration-re-password" name="registration-re-password" class="form-control" placeholder="Input your password ..." required="required" autocomplete="off">
                         <i class="absolute fa-solid fa-eye password-sh-toggle pw-s"></i>
                         <i class="absolute hidden fa-solid fa-eye-slash password-sh-toggle pw-h"></i>
                     </div>
                     <div class="relative w-full input-group">
-                        <label for="ft-registration-re-password" class="form-label">Phone<span class="required">*</span></label>
-                        <input type="password" id="ft-registration-re-password" name="registration-re-password" class="form-control" placeholder="Input your password ..." required="required">
-                        <i class="absolute fa-solid fa-eye password-sh-toggle pw-s"></i>
-                        <i class="absolute hidden fa-solid fa-eye-slash password-sh-toggle pw-h"></i>
+                        <label for="ft-registration-address" class="form-label">Address</label>
+                        <textarea id="ft-registration-address" name="_user_address" class="form-control"></textarea>
                     </div>
                     <hr class="h-0.5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200">
                     <button class="w-full rounded btn btn-outline-blue">Register</button>
                     <a href="" class="text-sm text-right text-gray-400 cursor-pointer hover:underline hover:underline-offset-2 hover:text-blue-400 hover:decoration-blue-400">Forgot Password?</a>
                     <h5 class="text-sm text-right text-gray-400">
                         already have an account?
-                        <a href="" class="text-blue-400 underline cursor-pointer underline-offset-2 decoration-blue-400">Login Here</a>
+                        <a href="<?php echo $loginUrl; ?>" class="text-blue-400 underline cursor-pointer underline-offset-2 decoration-blue-400">Login Here</a>
                     </h5>
                 </form>
             </div>

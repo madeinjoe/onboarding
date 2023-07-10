@@ -10,3 +10,4 @@ defined('ABSPATH') || die("Can't access directly");
 
 require_once __DIR__ . '/class-enqueue.php';
 require_once __DIR__ . '/custom-enqueue.php';
+require_once __DIR__ . '/custom-mail.php';
