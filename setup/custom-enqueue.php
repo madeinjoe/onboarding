@@ -72,6 +72,14 @@ class CustomEnqueue
                 .form-control ~ .password-sh-toggle {
                     @apply fill-current text-gray-500 w-4 h-4 top-[60%] right-3 cursor-pointer hover:text-black;
                 }
+
+                .form-control.input-invalid ~ .password-sh-toggle {
+                    @apply fill-current text-gray-500 w-4 h-4 top-[45%] right-3 cursor-pointer hover:text-black;
+                }
+
+                .input-invalid {
+                    @apply border border-red-500 bg-red-200/80 focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 !important;
+                }
             }
         </style>';
     }

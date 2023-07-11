@@ -30,20 +30,24 @@ while (have_posts()) :
                     <div class="w-full input-group">
                         <label for="ft-registration-username" class="form-label">Username<span class="required">*</span></label>
                         <input type="text" id="ft-registration-username" name="registration-username" class="form-control" placeholder="Input your username ..." required />
+                        <span id="error-msg-username" class="text-sm italic text-red-400"></span>
                     </div>
                     <div class="w-full input-group">
                         <label for="ft-registration-email" class="form-label">Email<span class="required">*</span></label>
                         <input type="text" id="ft-registration-email" name="registration-email" class="form-control" placeholder="Input your username ..." required />
+                        <span id="error-msg-email" class="text-sm italic text-red-400"></span>
                     </div>
                     <div class="relative w-full input-group">
                         <label for="ft-registration-password" class="form-label">Password<span class="required">*</span></label>
                         <input type="password" id="ft-registration-password" name="registration-password" class="form-control" placeholder="Input your password ..." required="required" autocomplete="off">
                         <i class="absolute fa-solid fa-eye password-sh-toggle pw-s"></i>
                         <i class="absolute hidden fa-solid fa-eye-slash password-sh-toggle pw-h"></i>
+                        <span id="error-msg-password" class="text-sm italic text-red-400"></span>
                     </div>
                     <div class="relative w-full input-group">
                         <label for="ft-registration-re-password" class="form-label">Password Confirm<span class="required">*</span></label>
                         <input type="password" id="ft-registration-re-password" name="registration-re-password" class="form-control" placeholder="Input your password ..." required="required" autocomplete="off">
+                        <span id="error-msg-re-password" class="text-sm italic text-red-400"></span>
                         <i class="absolute fa-solid fa-eye password-sh-toggle pw-s"></i>
                         <i class="absolute hidden fa-solid fa-eye-slash password-sh-toggle pw-h"></i>
                     </div>

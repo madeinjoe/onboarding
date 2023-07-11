@@ -273,6 +273,10 @@ class AdmissionPage extends RegisterPost
                 $thisUser = new WP_User($addUser);
                 $thisUser->set_role('subscriber');
 
+                /** Save user address */
+                $metaValue = sanitize_textarea_field($_POST['_user_address']);
+                update_user_meta($addUser, '_user_address', $metaValue);
+
                 /** Update activation code */
                 $activationCode = wp_hash($addUser.time());
                 $activationPage = get_page_by_path('custom-activation', 'object', 'page');
@@ -283,10 +287,14 @@ class AdmissionPage extends RegisterPost
                 $headers[] = 'From: '.WPMS_MAIL_FROM_NAME.'<'.WPMS_MAIL_FROM.'>';
                 wp_mail( sanitize_email($_POST['registration-email']), 'SUBJECT', 'Activation link : ' . $activationUrl, $headers );
 
+                /** redirect */
+                $pageLogin = get_page_by_path('custom-login', 'object', 'page');
+                $redirect = get_permalink($pageLogin->ID);
+
                 $response = [
                     'success' => false,
                     'message' => 'success adding user.',
-                    'active_code' => $activationCode
+                    'redirect' => $activationCode
                 ];
                 return wp_send_json($response, 200);
             }
