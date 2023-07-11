@@ -42,6 +42,7 @@ class ProductCPT extends RegisterCPT
         add_action('save_post', [$this, 'productSaveMB']);
         add_action('wp_head', [$this, 'productMetatagKeywords']);
         add_filter('cf_filter_the_title', [$this, 'productTitleFilter'], 10, 3);
+        add_action('the_post', [$this, 'productRenderToPage'], 10, 1);
     }
 
     public function productsCreateCPT()
@@ -210,6 +211,14 @@ class ProductCPT extends RegisterCPT
         ];
 
         $this->taxonomy($slug_cpt, $slug_tax, $args);
+    }
+
+    public function productRenderToPage($post) {
+        if (is_single()) {
+            print("<pre>".print_r($post, true)."</pre>");
+            $imgSource = get_post_meta();
+        }
+        // echo get_fields($post->ID, '_wp_');
     }
 }
 
