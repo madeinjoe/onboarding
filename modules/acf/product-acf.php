@@ -5,6 +5,7 @@ class ProductACF {
     public function __construct() {
         // $this->productAddACF();
         $this->productOptionPage();
+        add_action('the_post', [$this, 'productRenderPage'], 10, 1);
     }
 
     public function productAddACF () {
@@ -117,6 +118,108 @@ class ProductACF {
 				"capability" => "edit_posts",
 				"redirect" => false,
 			]);
+        }
+    }
+
+    public function productRenderPage ($post) {
+        if (is_single() && $post->post_type === 'products') {
+            if (get_field('product_variant', $post->ID) !== null && count(get_field('product_variant', $post->ID)) > 0) {
+                $variant = [];
+                foreach (get_field('product_variant', $post->ID) as $key => $value) {
+                    array_push($variant, "[".$value['variant_code']."] - ".$value['variant_name']);
+                }
+            }
+
+            $output = '<div class="container page-content justify-self-center">';
+            $output .= '<table>';
+            $output .= '<thead>';
+            $output .= '<tr>';
+            $output .= '<th>Key</th>';
+            $output .= '<th>Value</th>';
+            $output .= '</tr>';
+            $output .= '</thead>';
+            $output .= '<tbody>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_type </td>';
+            $output .= '<td>'.get_field('product_type', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_price </td>';
+            $output .= '<td>'.get_field('product_price', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_status </td>';
+            $output .= '<td>'.get_field('product_status', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_type </td>';
+            $output .= '<td>'.get_field('product_type', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_colour </td>';
+            $output .= '<td>'.implode(', ', get_field('product_colour', $post->ID)).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_variant </td>';
+            $output .= '<td>'.implode(', ', $variant).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_brand </td>';
+            $output .= '<td>'.implode(', ', get_field('product_brand', $post->ID)).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_ecommerce_link </td>';
+            $output .= '<td>'.get_field('product_ecommerce_link', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_thumbnail </td>';
+            $output .= '<td> <img src="'.get_field('product_thumbnail', $post->ID).'" alt="" width="200" height="150" /></td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_short_description </td>';
+            $output .= '<td>'.get_field('product_short_description', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_has_bonus </td>';
+            $output .= '<td>'.get_field('product_has_bonus', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td> product_embed </td>';
+            $output .= '<td>'.get_field('product_embed', $post->ID).'</td>';
+            $output .= '</tr>';
+
+            $output .= '<tr>';
+            $output .= '<td rowspan="'.(count(get_field('stock_group', $post->ID)) + 1).'"> stock_group </td>';
+            // $output .= '<td>'.get_field('stock_group', $post->ID).'</td>';
+            $output .= '</tr>';
+            foreach(get_field('stock_group', $post->ID) as $key => $value) {
+                $output .= '<tr>';
+                $output .= '<td>key : '.$key.' => value : '.get_field($key, $post->ID).'</td>';
+                $output .= '</tr>';
+            }
+
+            $output .= '<tr>';
+            $output .= '<td> size </td>';
+            $output .= '<td>'.get_field('shirt_size', $post->ID).'</td>';
+            $output .= '</tr>';
+            $output .= '</tbody>';
+            $output .= '</table>';
+            $output .= '</div>';
+
+            $a = apply_filters('the_content', $output);
+            echo $a;
         }
     }
 }
