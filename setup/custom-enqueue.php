@@ -28,6 +28,36 @@ class CustomEnqueue
         /** CDN */
         wp_register_script('tailwind-cdn', 'https://cdn.tailwindcss.com', [], '1.0', false);
         wp_enqueue_script('tailwind-cdn');
+
+        echo "
+        <script>
+        tailwind.config = {
+            theme: {
+                fontSize: {
+                    'thxl': ['2rem', '2.125rem'],
+                },
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    },
+                    boxShadow: {
+                      '3xl': '0 0px 40px rgba(0, 0, 0, 0.25)',
+                    },
+                    animation: {
+                      fade: 'fadeOut 5s ease-in-out',
+                    },
+
+                    keyframes: {
+                      fadeOut: {
+                        '0%': { backgroundColor: theme('colors.red.300') },
+                        '100%': { backgroundColor: theme('colors.transparent') },
+                      },
+                    }
+                }
+            }
+        }
+        </script>";
+
         echo '
         <style type="text/tailwindcss">
             @layer base {
@@ -79,6 +109,90 @@ class CustomEnqueue
 
                 .input-invalid {
                     @apply border border-red-500 bg-red-200/80 focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 !important;
+                }
+
+                .product_title {
+                    @apply text-4xl font-bold tracking-wide
+                }
+
+                .woocommerce-product-gallery {
+                    @apply relative;
+                }
+
+                .woocommerce-product-gallery__trigger {
+                    @apply absolute right-3 top-3 z-10;
+                }
+
+                .onsale {
+                    @apply absolute z-10 top-3 left-2 h-2 w-2 pt-0 !important;
+                }
+
+                .price {
+                    @apply align-middle;
+                }
+
+                del bdi {
+                    @apply text-lg font-semibold mr-2;
+                }
+
+                ins bdi {
+                    @apply text-2xl font-bold text-green-600;
+                }
+
+                form.cart, .woocommerce-variation-add-to-cart {
+                    @apply flex flex-col gap-3;
+                }
+
+                .wp-post-image {
+                    @apply rounded-xl border-2 border-black p-1 !important;
+                }
+
+                div.quantity > input.qty {
+                    @apply w-24 !important;
+                }
+
+                .wc-shop-title > h2 {
+                    @apply text-lg font-bold !important;
+                }
+
+                .wc-shop-price > span {
+                    @apply flex flex-col items-start;
+                }
+
+                .wc-shop-price > span > del > span > bdi {
+                    @apply text-gray-500 font-normal text-base;
+                }
+
+                .wc-shop-price > span > ins > span > bdi {
+                    @apply text-emerald-600 font-bold text-xl -mt-1;
+                }
+
+                .zooming {
+                    @apply max-h-[32rem] !important;
+                }
+
+                .tab-nav {
+                    @apply py-2 font-semibold text-center uppercase rounded h-fit border border-solid border-emerald-500;
+                }
+
+                .tab-nav:not(.active) {
+                    @apply text-emerald-500 duration-500;
+                }
+
+                .tab-nav.active {
+                    @apply bg-emerald-500 text-white duration-500;
+                }
+
+                .tab-content {
+                    @apply top-0;
+                }
+
+                .tab-content:not(.active) {
+                    @apply absolute opacity-0 z-0 duration-300;
+                }
+
+                .tab-content.active {
+                    @apply static opacity-100 z-10 duration-500;
                 }
             }
         </style>';
